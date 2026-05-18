@@ -5,7 +5,7 @@ import {
 	Controller,
 	Delete,
 	NotFoundException,
-	Query,
+	Param,
 	UseGuards,
 	UsePipes
 } from '@nestjs/common'
@@ -18,11 +18,11 @@ import { DeleteByIdService } from '../services/delete-by-id.service'
 export class DeleteByIdController {
 	constructor(private readonly deleteByIdService: DeleteByIdService) {}
 
-	@Delete()
+	@Delete(':id')
 	@UseGuards(JwtAuthGuard)
 	@UsePipes(new ZodValidationPipe(paramIdSchema))
 	@Roles('ADMIN')
-	async handle(@Query('id') id: ParamIdDTO) {
+	async handle(@Param('id') id: ParamIdDTO) {
 		try {
 			return await this.deleteByIdService.execute(id)
 		} catch (error) {
