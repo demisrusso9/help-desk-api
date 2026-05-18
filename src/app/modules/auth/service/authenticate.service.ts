@@ -16,7 +16,7 @@ export class AuthenticateService {
 	) {}
 
 	async execute(user: SignInUserDTO) {
-		const checkIfUserExists = await this.userRepository.findCredentialsByEmail(user.email)
+		const checkIfUserExists = await this.userRepository.findByEmail(user.email)
 
 		if (!checkIfUserExists) {
 			throw new InvalidCredentialsError()
@@ -34,7 +34,13 @@ export class AuthenticateService {
 		)
 
 		return {
-			accessToken
+			accessToken,
+			user: {
+				id: checkIfUserExists.id,
+				name: checkIfUserExists.name,
+				email: checkIfUserExists.email,
+				role: checkIfUserExists.role
+			}
 		}
 	}
 }

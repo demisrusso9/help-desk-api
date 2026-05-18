@@ -31,35 +31,35 @@ enum Status {
 }
 
 model User {
-  id                 String                   @id @default(uuid())
+  id                 String    @id @default(uuid())
   name               String
-  email              String                   @unique
+  email              String    @unique
   password           String
   role               Role
   profileImageUrl    String?
-  mustChangePassword Boolean                  @default(false)
-  createdAt          DateTime                 @default(now()) @map("created_at")
-  updatedAt          DateTime?                @map("updated_at")
-  availabilities     TechnicianAvailability[]
+  mustChangePassword Boolean   @default(false)
+  createdAt          DateTime  @default(now()) @map("created_at")
+  updatedAt          DateTime? @map("updated_at")
+  availabilities     String[]
 
-  clientTickets     Ticket[] @relation("ClientTickets")
-  technicianTickets Ticket[] @relation("TechnicianTickets")
+  clientTickets            Ticket[]                 @relation("ClientTickets")
+  technicianTickets        Ticket[]                 @relation("TechnicianTickets")
 
   @@map("users")
 }
 
-model TechnicianAvailability {
-  id           String  @id @default(uuid())
-  technicianId String
-  weekDay      WeekDay
-  startTime    String
-  endTime      String
+// model TechnicianAvailability {
+//   id           String  @id @default(uuid())
+//   technicianId String
+//   weekDay      WeekDay
+//   startTime    String
+//   endTime      String
 
-  technician User @relation(fields: [technicianId], references: [id])
+//   technician User @relation(fields: [technicianId], references: [id])
 
-  @@index([technicianId])
-  @@map("technician_availabilities")
-}
+//   @@index([technicianId])
+//   @@map("technician_availabilities")
+// }
 
 model Service {
   id             String          @id @default(uuid())
