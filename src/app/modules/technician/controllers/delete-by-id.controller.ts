@@ -18,7 +18,7 @@ import { DeleteByIdService } from '../services/delete-by-id.service'
 export class DeleteByIdController {
 	constructor(private readonly deleteByIdService: DeleteByIdService) {}
 
-	@Delete('/delete')
+	@Delete()
 	@UseGuards(JwtAuthGuard)
 	@UsePipes(new ZodValidationPipe(paramIdSchema))
 	@Roles('ADMIN')

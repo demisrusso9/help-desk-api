@@ -7,7 +7,7 @@ import { ListService } from '../services/list.service'
 export class ListController {
 	constructor(private readonly listService: ListService) {}
 
-	@Get('/list')
+	@Get()
 	@UseGuards(JwtAuthGuard)
 	@Roles('ADMIN')
 	async handle() {

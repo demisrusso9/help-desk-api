@@ -20,7 +20,7 @@ import { JwtAuthGuard } from '../../auth/jwt/jwt-auth.guard'
 export class RegisterController {
 	constructor(private readonly registerService: RegisterService) {}
 
-	@Post('/register')
+	@Post()
 	@UsePipes(new ZodValidationPipe(createTechnicianSchema))
 	@UseGuards(JwtAuthGuard)
 	@Roles('ADMIN')

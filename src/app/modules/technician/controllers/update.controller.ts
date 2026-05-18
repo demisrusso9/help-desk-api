@@ -5,7 +5,7 @@ import {
 	Body,
 	Controller,
 	NotFoundException,
-	Put,
+	Patch,
 	UseGuards,
 	UsePipes
 } from '@nestjs/common'
@@ -17,7 +17,7 @@ import { UpdateService } from '../services/update.service'
 export class UpdateController {
 	constructor(private readonly updateService: UpdateService) {}
 
-	@Put('/update')
+	@Patch()
 	@UseGuards(JwtAuthGuard)
 	@UsePipes(new ZodValidationPipe(updateAdminSchema))
 	@Roles('ADMIN')
